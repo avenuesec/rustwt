@@ -60,7 +60,7 @@ pub type Payload = BTreeMap<String, Value>;
 
 
 /// Struct representing a JWT Header.
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Header {
     alg: Algorithm,
     typ: Option<String>,
