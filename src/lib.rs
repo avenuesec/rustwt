@@ -368,12 +368,12 @@ fn decode_segments(encoded_token: &str) -> Option<(Header, Payload, Vec<u8>, Str
 
 
 fn decode_header_and_payload(header_segment: &str, payload_segment: &str) -> (Header, Payload) {
-    let headder_bytes = base64::decode(header_segment).expect("could not decoding base64 header");
+    let headder_bytes = base64::decode_config(header_segment, base64::URL_SAFE).expect("could not decoding base64 header");
     let header: Header =
         serde_json::from_slice(&headder_bytes[..]).expect("could not convert header to json");
 
 
-    let payload_bytes = base64::decode(payload_segment).expect("could not decoding base64 payload");
+    let payload_bytes = base64::decode_config(payload_segment, base64::URL_SAFE).expect("could not decoding base64 payload");
     let payload: Payload =
         serde_json::from_slice(&payload_bytes[..]).expect("could not convert header to json");
     (header, payload)
